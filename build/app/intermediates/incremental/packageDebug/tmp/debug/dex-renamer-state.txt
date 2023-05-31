@@ -1,4 +1,4 @@
-#Thu Jun 01 00:58:04 KST 2023
+#Thu Jun 01 01:40:52 KST 2023
 base.0=C\:\\Users\\User\\OneDrive - konkuk.ac.kr\\Documents\\Sem4_1\\K-lab\\Project\\daily_diet_date\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
