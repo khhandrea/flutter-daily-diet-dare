@@ -202,10 +202,9 @@ class SignInPage extends StatelessWidget {
     );
   }
 }
+
 class ProfilePage extends StatelessWidget {
   static const routeName = '/profile';
-
-  @override
   @override
   Widget build(BuildContext context) {
 
@@ -261,54 +260,71 @@ class ProfilePage extends StatelessWidget {
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
-      child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [ Colors.white, Colors.green.shade200 ]
+      child : Stack (
+        children : [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [ Colors.white, Colors.green.shade200 ]
+              ),
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/robot-lookDown.png'),
+                                fit: BoxFit.cover
+                            )
+                        )
+                    )
+                ),
+                Expanded(
+                  flex: 10,
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            spreadRadius: 1,
+                            blurRadius: 3,
+                            offset: Offset(0, 3),
+                          )
+                        ]
+                    ),
+                    child: getInfoSection,
+                  ),
+                )
+              ],
+            )
+          ),
+          Positioned(
+          top: 48,
+          right: 8,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+          },
+          child: Image.asset(
+              'assets/back_btn.png',
+            width: 60,
+            height: 60,
+              ),
             ),
           ),
-          child: Column(
-            children: [
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/robot-lookDown.png'),
-                              fit: BoxFit.cover
-                          )
-                      )
-                  )
-              ),
-              Expanded(
-                flex: 10,
-                child: Container(
-                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
-                  height: double.infinity,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 1,
-                          blurRadius: 3,
-                          offset: Offset(0, 3),
-                        )
-                      ]
-                  ),
-                  child: getInfoSection,
-                ),
-              )
-            ],
-          )
+        ],
       ),
     );
   }
-
 
   Widget _personalDetailInfo(String value, String imagePath) {
     return Container(

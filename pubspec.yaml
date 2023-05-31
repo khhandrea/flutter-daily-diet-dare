@@ -67,6 +67,7 @@ flutter:
     - assets/mail.png
     - assets/instagram.png
     - assets/cake.png
+    - assets/back_btn.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
