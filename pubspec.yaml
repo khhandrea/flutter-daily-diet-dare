@@ -68,6 +68,10 @@ flutter:
     - assets/instagram.png
     - assets/cake.png
     - assets/back_btn.png
+    - assets/robot.png
+    - assets/welcome.png
+    - assets/signup.png
+    - assets/login.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

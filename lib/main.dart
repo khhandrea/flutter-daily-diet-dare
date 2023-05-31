@@ -25,30 +25,62 @@ class MyApp extends StatelessWidget {
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Main Page'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              child: Text('Go to Sign In Page'),
-              onPressed: () {
-                Navigator.pushNamed(context, SignInPage.routeName);
-              },
+      Widget getInfoSection = Card();
+      return Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.green.shade400, Colors.white],
             ),
-            SizedBox(height: 16), // Add some spacing between the buttons
-            ElevatedButton(
-              child: Text('Go to Profile Page'),
-              onPressed: () {
-                Navigator.pushNamed(context, ProfilePage.routeName);
-              },
-            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image.asset(
+                'assets/welcome.png',
+                height: 150,
+              ),
+              SizedBox(height: 16),
+              Image.asset(
+                'assets/robot.png',
+                height: 200,
+              ),
+              SizedBox(height: 16),
+              Column(
+                children: [
+                  SizedBox(height: 16),
+                  Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          // Handle button 1 press
+                        },
+                        child: Image.asset(
+                          'assets/login.png',
+                          width: 120,
+                          height: 40,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      InkWell(
+                        onTap: () {
+                          // Handle button 2 press
+                        },
+                        child: Image.asset(
+                          'assets/signup.png',
+                          width: 120,
+                          height: 40,
+                        ),
+                      ),
+                  ],
+              ),
+            ],
+          ),
           ],
         ),
-      ),
+        ),
     );
   }
 }
@@ -161,7 +193,6 @@ class SignInPage extends StatelessWidget {
       ),
     );
   }
-
 
   TextField _personalDetailInfo(String label) {
     return TextField(
