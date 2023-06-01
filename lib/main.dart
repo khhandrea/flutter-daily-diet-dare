@@ -55,7 +55,12 @@ class MainPage extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          // Handle button 1 press
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignInPage(),
+                            ),
+                          );
                         },
                         child: Image.asset(
                           'assets/login.png',
@@ -66,7 +71,12 @@ class MainPage extends StatelessWidget {
                       SizedBox(height: 16),
                       InkWell(
                         onTap: () {
-                          // Handle button 2 press
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProfilePage(),
+                            ),
+                          );
                         },
                         child: Image.asset(
                           'assets/signup.png',
