@@ -1,6 +1,7 @@
 
+import 'package:daily_diet_date/sign_in.dart';
 import 'package:flutter/material.dart';
-import 'sign_in.dart';
+import 'sign_up.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
-            child: SignIn()
+            // child: SignUp()
+          child: SignIn(),
         )
       ),
     );
