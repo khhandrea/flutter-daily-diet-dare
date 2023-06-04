@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 import 'dart:math';
 import 'package:intl/intl.dart';
 
-class view_profile extends StatelessWidget {
-  List<String> userInputList = List<String>.filled(5, '');
+class View_ProfilePage extends StatelessWidget {
+  final List<String> userInputList;
+
+  View_ProfilePage({required this.userInputList});
   static const routeName = '/profile';
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class view_profile extends StatelessWidget {
                   Expanded(
                       flex: 2,
                       child: Text(
-                        "Please enter your details",
+                        "Welcome To Profile Page",
                         style: TextStyle(
                           color: Colors.green.shade500,
                           fontSize: 20,
@@ -45,12 +47,12 @@ class view_profile extends StatelessWidget {
                 child : Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _personalDetailInfo(0,  "assets/Icon awesome.png"),
-                    _personalDetailInfo(1,  "assets/cake.png"),
-                    _personalDetailInfo(2,  "assets/phone.png"),
-                    _personalDetailInfo(3,  "assets/instagram.png"),
-                    _personalDetailInfo(4,  "assets/mail.png"),
-                    _personalDataInfoButton(context, userInputList),
+                    _personalDetailInfo( userInputList[0],"assets/Icon awesome.png"),
+                    _personalDetailInfo(userInputList[1], "assets/cake.png"),
+                    _personalDetailInfo(userInputList[2], "assets/phone.png"),
+                    _personalDetailInfo(userInputList[3], "assets/instagram.png"),
+                    _personalDetailInfo(userInputList[4], "assets/mail.png"),
+                    _personalDataInfoButton(),
                   ],
                 )
             ),
@@ -127,64 +129,34 @@ class view_profile extends StatelessWidget {
     );
   }
 
-  Widget _personalDetailInfo(int index, String imagePath) {
-    TextEditingController controller = TextEditingController();
-    String shadowText = '';
-    switch (index) {
-      case 0:
-        shadowText = 'Enter Your Name';
-        break;
-      case 1:
-        shadowText = 'Enter your birthdate';
-        break;
-      case 2:
-        shadowText = 'Enter your phone number';
-        break;
-      case 3:
-        shadowText = 'Enter your Instagram username';
-        break;
-      case 4:
-        shadowText = 'Enter your email address';
-        break;
-    }
-
+  Widget _personalDetailInfo(String value, String imagePath) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 10), // Add margin of 8 pixels at the bottom
       child: Row(
         children: [
           Container(
             width: 24,
             height: 24,
-            child: Image.asset(imagePath),
+            child : Image.asset(imagePath), // Image widget
           ),
           SizedBox(width: 8),
           Expanded(
-            child: TextFormField(
-              controller: controller,
-              onChanged: (value) {
-                userInputList[index] = value;
-              },
+            child : TextFormField(// Add a space between the image and the TextFormField
+              readOnly: true,
+              initialValue: value,
               decoration: InputDecoration(
-                contentPadding:
-                EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: Colors.lightGreen,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                    borderSide: BorderSide(
+                      width: 1, color: Colors.lightGreen,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(5))
                 ),
                 focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: Colors.green,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                hintText: shadowText,
-                hintStyle: TextStyle(
-                  color: Colors.grey,
-                  fontStyle: FontStyle.italic,
+                    borderSide: BorderSide(
+                      width: 1, color: Colors.green,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
                 ),
               ),
             ),
@@ -194,60 +166,22 @@ class view_profile extends StatelessWidget {
     );
   }
 
-  ElevatedButton _personalDataInfoButton(BuildContext context, List<String> userInputList) {
+  ElevatedButton _personalDataInfoButton() {
     return ElevatedButton(
       style: ButtonStyle(
-        foregroundColor: MaterialStatePropertyAll(Colors.white),
-        backgroundColor: MaterialStatePropertyAll(Colors.green.shade300),
-        fixedSize: MaterialStatePropertyAll(Size(160, 50)),
-        elevation: MaterialStatePropertyAll(3),
+          foregroundColor: const MaterialStatePropertyAll(Colors.white),
+          backgroundColor: MaterialStatePropertyAll(Colors.green.shade300),
+          fixedSize: const MaterialStatePropertyAll(Size(160, 50)),
+          elevation: const MaterialStatePropertyAll(3)
       ),
-      onPressed: () {
-        // Navigate to another page when the button is pressed
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => View_ProfilePage(userInputList : userInputList)
-          ),
-        );
-      },
+      onPressed: null, // TODO have to be implemented 'onPressed'
       child: const Text(
         "SAVE",
         style: TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.bold,
+            fontSize: 17,
+            fontWeight: FontWeight.bold
         ),
       ),
-    );
-  }
-
-  void _saveUserInput(BuildContext context) {
-    // Perform any validation or additional processing here before saving the input
-
-    // Display the user inputs in a dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('User Inputs'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(
-              userInputList.length,
-                  (index) => Text('${index + 1}. ${userInputList[index]}'),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
     );
   }
 }
