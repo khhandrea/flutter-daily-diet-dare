@@ -1,7 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:math';
+import 'package:intl/intl.dart';
 
+
+
+
+class Challenge {
+  final String category;
+  final String description;
+
+  Challenge({required this.category, required this.description});
+}
+
+List<Challenge> weightLossChallenges = [
+  Challenge(category: 'Weight Loss', description: 'Take a 30-minute brisk walk today.'),
+  Challenge(category: 'Weight Loss', description: 'Replace sugary drinks with water for the entire day.'),
+  Challenge(category: 'Weight Loss', description: 'Do 10 minutes of high-intensity interval training (HIIT).'),
+  // Add more weight loss challenges
+];
+
+List<Challenge> healthyEatingChallenges = [
+  Challenge(category: 'Healthy Eating', description: 'Eat at least five servings of fruits and vegetables today.'),
+  Challenge(category: 'Healthy Eating', description: 'Cook a healthy homemade meal for dinner.'),
+  Challenge(category: 'Healthy Eating', description: 'Choose whole grain options for your breakfast.'),
+  // Add more healthy eating challenges
+];
+
+List<Challenge> healthyLifestyleChallenges = [
+  Challenge(category: 'Healthy Lifestyle', description: 'Practice meditation or deep breathing for 10 minutes.'),
+  Challenge(category: 'Healthy Lifestyle', description: 'Get at least 8 hours of quality sleep tonight.'),
+  Challenge(category: 'Healthy Lifestyle', description: 'Take a break from screens and engage in a hobby or physical activity.'),
+  // Add more healthy lifestyle challenges
+];
+
+Challenge getChallengeBasedOnTime(List<Challenge> challenges) {
+  final now = DateTime.now();
+  final hour = DateFormat('HH').format(now);
+  final int hourOfDay = int.parse(hour);
+  final index = hourOfDay % challenges.length;
+  return challenges[index];
+}
 void main() {
+  // Generate challenges based on the current time of the day
+  final weightLossChallenge = getChallengeBasedOnTime(weightLossChallenges);
+  final healthyEatingChallenge = getChallengeBasedOnTime(healthyEatingChallenges);
+  final healthyLifestyleChallenge = getChallengeBasedOnTime(healthyLifestyleChallenges);
+
+  // Print the challenges for the current time
+  print('Weight Loss Challenge: ${weightLossChallenge.description}');
+  print('Healthy Eating Challenge: ${healthyEatingChallenge.description}');
+  print('Healthy Lifestyle Challenge: ${healthyLifestyleChallenge.description}');
   runApp(MyApp());
 }
 
