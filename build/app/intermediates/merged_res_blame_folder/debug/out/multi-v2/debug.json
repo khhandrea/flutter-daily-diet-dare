@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\User\\OneDrive - konkuk.ac.kr\\Documents\\Sem4_1\\K-lab\\Project\\daily_diet_date\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\User\\OneDrive - konkuk.ac.kr\\Documents\\Sem4_1\\K-lab\\Real_project\\daily_diet_date\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -1297,7 +1297,7 @@
             "outputFile": "com.example.daily_diet_date.app-merged_res-11:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\User\\OneDrive - konkuk.ac.kr\\Documents\\Sem4_1\\K-lab\\Project\\daily_diet_date\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\Users\\User\\OneDrive - konkuk.ac.kr\\Documents\\Sem4_1\\K-lab\\Real_project\\daily_diet_date\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

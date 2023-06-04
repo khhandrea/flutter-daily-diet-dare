@@ -3,9 +3,6 @@ import 'package:flutter/services.dart';
 import 'dart:math';
 import 'package:intl/intl.dart';
 
-
-
-
 class Challenge {
   final String category;
   final String description;
@@ -35,22 +32,13 @@ List<Challenge> healthyLifestyleChallenges = [
 ];
 
 Challenge getChallengeBasedOnTime(List<Challenge> challenges) {
-  final now = DateTime.now();
-  final hour = DateFormat('HH').format(now);
-  final int hourOfDay = int.parse(hour);
-  final index = hourOfDay % challenges.length;
-  return challenges[index];
+  final DateTime now = DateTime.now();
+  final int day = now.day;
+  final Challenge selectedChallenge = challenges[day % challenges.length];
+  return selectedChallenge;
 }
 void main() {
   // Generate challenges based on the current time of the day
-  final weightLossChallenge = getChallengeBasedOnTime(weightLossChallenges);
-  final healthyEatingChallenge = getChallengeBasedOnTime(healthyEatingChallenges);
-  final healthyLifestyleChallenge = getChallengeBasedOnTime(healthyLifestyleChallenges);
-
-  // Print the challenges for the current time
-  print('Weight Loss Challenge: ${weightLossChallenge.description}');
-  print('Healthy Eating Challenge: ${healthyEatingChallenge.description}');
-  print('Healthy Lifestyle Challenge: ${healthyLifestyleChallenge.description}');
   runApp(MyApp());
 }
 
@@ -74,72 +62,78 @@ class MyApp extends StatelessWidget {
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-      Widget getInfoSection = Card();
-      return Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.green.shade400, Colors.white],
-            ),
+    Widget getInfoSection = Card();
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.green.shade400, Colors.white],
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Image.asset(
-                'assets/welcome.png',
-                height: 150,
-              ),
-              SizedBox(height: 16),
-              Image.asset(
-                'assets/robot.png',
-                height: 200,
-              ),
-              SizedBox(height: 16),
-              Column(
-                children: [
-                  SizedBox(height: 16),
-                  Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignInPage(),
-                            ),
-                          );
-                        },
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Image.asset(
+              'assets/welcome.png',
+              height: 150,
+            ),
+            SizedBox(height: 16),
+            Image.asset(
+              'assets/robot.png',
+              height: 200,
+            ),
+            SizedBox(height: 16),
+            Column(
+              children: [
+                SizedBox(height: 16),
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignInPage(),
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        width: 300,
+                        height: 50,
                         child: Image.asset(
                           'assets/login.png',
-                          width: 120,
-                          height: 40,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(height: 16),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProfilePage(),
-                            ),
-                          );
-                        },
+                    ),
+                    SizedBox(height: 16),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfilePage(),
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        width: 300,
+                        height: 50,
                         child: Image.asset(
                           'assets/signup.png',
-                          width: 120,
-                          height: 40,
+                          fit: BoxFit.cover,
                         ),
                       ),
+                    ),
                   ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
           ],
         ),
-        ),
+      ),
     );
   }
 }
@@ -294,6 +288,9 @@ class SignInPage extends StatelessWidget {
 }
 
 class ProfilePage extends StatelessWidget {
+  final weightLossChallenge = getChallengeBasedOnTime(weightLossChallenges);
+  final healthyEatingChallenge = getChallengeBasedOnTime(healthyEatingChallenges);
+  final healthyLifestyleChallenge = getChallengeBasedOnTime(healthyLifestyleChallenges);
   static const routeName = '/profile';
   @override
   Widget build(BuildContext context) {
@@ -334,7 +331,7 @@ class ProfilePage extends StatelessWidget {
               child : Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _personalDetailInfo("David Kim","assets/Icon awesome.png"),
+                  _personalDetailInfo(weightLossChallenge.description,"assets/Icon awesome.png"),
                   _personalDetailInfo("24 Oct 2000", "assets/cake.png"),
                   _personalDetailInfo("010-7426-3239", "assets/phone.png"),
                   _personalDetailInfo("@DavidKim42", "assets/instagram.png"),
